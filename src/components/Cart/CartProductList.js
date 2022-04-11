@@ -10,6 +10,7 @@ export const CartProductList = ({
     productsInCart,
     productsObject = getProductsObject(productsArray),
     CartItem = CartProductListItem,
+    removeProductFromCart,
 }) => {
     return (
         <>
@@ -18,6 +19,7 @@ export const CartProductList = ({
                     key={productId}
                     product={productsObject[productId]}
                     productCount={productsInCart[productId]}
+                    removeProductFromCart={removeProductFromCart}
                 />
             ))}
         </>
