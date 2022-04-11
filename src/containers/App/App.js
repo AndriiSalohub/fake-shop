@@ -20,9 +20,7 @@ export const App = () => {
 
     const removeProductFromCart = (productId) => {
         setProductsInCart((prevState) => {
-            const prevProductsInCart = { ...prevState ё} //Object.assign({}, prevState)
-            delete prevProductsInCart[productId]
-            return prevProductsInCart
+            return omit(prevState, [productId])
         })
     }
 
