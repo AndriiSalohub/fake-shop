@@ -12,7 +12,7 @@ const useStyles = makeStyles({
     },
 })
 
-export const ProductList = ({ addProductToCart }) => {
+export const ProductList = ({ addProductToCart, changeProductQuantity }) => {
     const classes = useStyles()
     return (
         <>

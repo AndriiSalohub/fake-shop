@@ -4,7 +4,11 @@ import { CartProductList } from 'components/Cart/CartProductList'
 import { CartProductListItemExtended } from 'components/Cart/CartProductListemItemExtended'
 import { Grid } from '@mui/material'
 
-export const CartPage = ({ productsInCart, removeProductFromCart }) => {
+export const CartPage = ({
+    productsInCart,
+    removeProductFromCart,
+    changeProductQuantity,
+}) => {
     return (
         <>
             <h1>Cart</h1>
@@ -13,6 +17,7 @@ export const CartPage = ({ productsInCart, removeProductFromCart }) => {
                     productsInCart={productsInCart}
                     CartItem={CartProductListItemExtended}
                     removeProductFromCart={removeProductFromCart}
+                    changeProductQuantity={changeProductQuantity}
                 />
             </Grid>
 

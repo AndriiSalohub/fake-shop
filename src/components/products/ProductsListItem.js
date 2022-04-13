@@ -19,9 +19,9 @@ export const ProductsListItem = ({
     capacity,
     price,
     image,
+    changeProductQuantity,
 }) => {
     const [count, setCount] = useState(1)
-
     const onDecrement = () => {
         setCount(count - 1)
     }
@@ -43,12 +43,7 @@ export const ProductsListItem = ({
                     <div className="product-features">Type: {type}</div>
                     <div className="product-features">Capacity: {capacity}</div>
                     <div className="product-price">{price} $</div>
-                    <Quantity
-                        onDecrement={onDecrement}
-                        onIncrement={onIncrement}
-                        count={count}
-                        setCount={setCount}
-                    />
+                    <Quantity count={count} />
                 </CardContent>
                 <CardActions className="wrap-btn-add-to-cart">
                     <Button
