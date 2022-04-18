@@ -11,8 +11,10 @@ import PropTypes from 'prop-types'
 import { Quantity } from 'components/Quantity/Quantity'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
+import { useSelector } from 'react-redux'
+import { connect } from 'react-redux'
 
-export const ProductsListItem = ({
+const ProductsListItem = ({
     id,
     addProductToCart,
     name,
@@ -21,8 +23,9 @@ export const ProductsListItem = ({
     capacity,
     price,
     image,
-    changeProductQuantity,
+    isLiked = false,
 }) => {
+    // const likedProducts = useSelector((state) => state)
     const [count, setCount] = useState(1)
     const onDecrement = () => {
         setCount(count - 1)
@@ -40,7 +43,7 @@ export const ProductsListItem = ({
                         <img src={image} alt="" />
                     </div>
                     <Button>
-                        {false ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+                        {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
                     </Button>
 
                     <h4>{name}</h4>
@@ -77,3 +80,9 @@ ProductsListItem.defaultProps = {
     description: 'No description...',
     image: '/images/noimage.jpg',
 }
+
+const mapStateToProps = (state, { id }) => ({
+    isLiked: state[id],
+})
+
+export default connect(mapStateToProps)(ProductsListItem)
