@@ -28,6 +28,8 @@ const CartProductListItemExtended = ({
     isLiked = false,
     addLike,
     removeLike,
+    removeProduct,
+    changeQuantity,
 }) => {
     const classes = useStyles()
     return (
@@ -46,13 +48,10 @@ const CartProductListItemExtended = ({
                         onDecrement={() => {
                             productCount === 1
                                 ? removeProductFromCart(product.id)
-                                : changeProductQuantity(
-                                      product.id,
-                                      productCount - 1
-                                  )
+                                : changeQuantity(product.id, productCount - 1)
                         }}
                         onIncrement={() =>
-                            changeProductQuantity(product.id, productCount + 1)
+                            changeQuantity(product.id, productCount + 1)
                         }
                     />
                     <Button
@@ -78,7 +77,7 @@ const CartProductListItemExtended = ({
 }
 
 const mapStateToProps = (state, { product }) => ({
-    isLiked: state[product.id],
+    isLiked: state.productsLikeState[product.id],
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -91,6 +90,17 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch({
             type: 'DISLIKE',
             id,
+        }),
+    removeProductFromCart: (id) =>
+        dispatch({
+            type: 'REMOVE_PRODUCT_FROM_CART',
+            id,
+        }),
+    changeQuantity: (id, count) =>
+        dispatch({
+            type: 'CHANGE_PRODUCT_QUANTITY',
+            id,
+            count,
         }),
 })
 

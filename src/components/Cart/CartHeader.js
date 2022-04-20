@@ -1,15 +1,9 @@
 import React, { useState } from 'react'
-import {
-    productsArray,
-    getProductsObject,
-} from 'components/products/productsArray'
 import { CartTotal } from './CartTotal'
 import { CartProductList } from './CartProductList'
+import { connect } from 'react-redux'
 
-export const CartHeader = ({
-    productsInCart,
-    productsObject = getProductsObject(productsArray),
-}) => {
+const CartHeader = ({ productsInCart }) => {
     return (
         <div>
             <CartProductList productsInCart={productsInCart} />
@@ -17,3 +11,9 @@ export const CartHeader = ({
         </div>
     )
 }
+
+const mapStateToProps = (state) => ({
+    productsInCart: state.productInCart,
+})
+
+export default connect(mapStateToProps)(CartHeader)

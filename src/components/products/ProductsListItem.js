@@ -11,7 +11,6 @@ import PropTypes from 'prop-types'
 import { Quantity } from 'components/Quantity/Quantity'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
-import { useSelector } from 'react-redux'
 import { connect } from 'react-redux'
 
 const ProductsListItem = ({
@@ -26,6 +25,7 @@ const ProductsListItem = ({
     isLiked = false,
     addLike,
     removeLike,
+    addToCart,
 }) => {
     // const likedProducts = useSelector((state) => state)
     const [count, setCount] = useState(1)
@@ -56,12 +56,16 @@ const ProductsListItem = ({
                     <div className="product-features">Type: {type}</div>
                     <div className="product-features">Capacity: {capacity}</div>
                     <div className="product-price">{price} $</div>
-                    <Quantity count={count} />
+                    <Quantity
+                        count={count}
+                        onIncrement={onIncrement}
+                        onDecrement={onDecrement}
+                    />
                 </CardContent>
                 <CardActions className="wrap-btn-add-to-cart">
                     <Button
                         variant="outlined"
-                        onClick={() => addProductToCart(id, count)}
+                        onClick={() => addToCart(id, count)}
                     >
                         Add to cart
                     </Button>
@@ -86,7 +90,8 @@ ProductsListItem.defaultProps = {
 }
 
 const mapStateToProps = (state, { id }) => ({
-    isLiked: state[id],
+    isLiked: state.productsLikeState[id],
+    inCart: { [id]: state.productInCart[id] },
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -99,6 +104,12 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch({
             type: 'DISLIKE',
             id,
+        }),
+    addToCart: (id, count) =>
+        dispatch({
+            type: 'ADD_PRODUCT_TO_CART',
+            id,
+            count,
         }),
 })
 

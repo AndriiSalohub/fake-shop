@@ -2,12 +2,11 @@ import React from 'react'
 import { Container } from '@mui/material'
 import { ProductList } from 'components/products/ProductsList'
 import { Route, Routes } from 'react-router-dom'
-import { CartPage } from 'pages/CartPage/CartPage'
+import CartPage from 'pages/CartPage/CartPage'
 import { PaymentPage } from 'pages/PaymentPage/Payment'
 import { ShippingPage } from 'pages/ShippingPage/Shipping'
 
 export const Main = ({
-    addProductToCart,
     productsInCart,
     removeProductFromCart,
     changeProductQuantity,
@@ -16,18 +15,8 @@ export const Main = ({
         <>
             <Container>
                 <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <ProductList addProductToCart={addProductToCart} />
-                        }
-                    />
-                    <Route
-                        path="products"
-                        element={
-                            <ProductList addProductToCart={addProductToCart} />
-                        }
-                    />
+                    <Route path="/" element={<ProductList />} />
+                    <Route path="products" element={<ProductList />} />
                     <Route
                         path="cart"
                         element={

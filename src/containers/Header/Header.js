@@ -6,7 +6,7 @@ import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import { Container } from '@mui/material'
 import { Menu } from 'components/Menu/Menu'
-import { CartHeader } from 'components/Cart/CartHeader'
+import CartHeader from 'components/Cart/CartHeader'
 import { Link } from 'react-router-dom'
 import { makeStyles } from '@mui/styles'
 
