@@ -5,6 +5,7 @@ import {
     productsArray,
 } from 'components/products/productsArray'
 import { CartProductListItem } from './CartProductListItem'
+import { connect, useSelector } from 'react-redux'
 
 export const CartProductList = ({
     productsInCart,
@@ -13,6 +14,7 @@ export const CartProductList = ({
     removeProductFromCart,
     changeProductQuantity,
 }) => {
+    const productsArray = useSelector((state) => state.products)
     return (
         <>
             {keys(productsInCart).map((productId) => (

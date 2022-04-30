@@ -1,15 +1,14 @@
 import React from 'react'
 import { CartTotal } from 'components/Cart/CartTotal'
 import { CartProductList } from 'components/Cart/CartProductList'
-import CartProductListItemExtended from 'components/Cart/CartProductListemItemExtended'
+import { CartProductListItemExtended } from 'components/Cart/CartProductListemItemExtended'
 import { Grid } from '@mui/material'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-const CartPage = ({
-    productsInCart,
-    removeProductFromCart,
-    changeProductQuantity,
-}) => {
+export const CartPage = ({ changeProductQuantity, removeProductFromCart }) => {
+    const dispatch = useDispatch()
+    const productsInCart = useSelector((state) => state.productInCart)
+
     return (
         <>
             <h1>Cart</h1>
@@ -26,9 +25,3 @@ const CartPage = ({
         </>
     )
 }
-
-const mapStateToProps = (state) => ({
-    productsInCart: state.productInCart,
-})
-
-export default connect(mapStateToProps)(CartPage)

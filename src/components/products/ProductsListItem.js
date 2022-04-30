@@ -11,9 +11,9 @@ import PropTypes from 'prop-types'
 import { Quantity } from 'components/Quantity/Quantity'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-const ProductsListItem = ({
+export const ProductsListItem = ({
     id,
     addProductToCart,
     name,
@@ -22,10 +22,6 @@ const ProductsListItem = ({
     capacity,
     price,
     image,
-    isLiked = false,
-    addLike,
-    removeLike,
-    addToCart,
 }) => {
     // const likedProducts = useSelector((state) => state)
     const [count, setCount] = useState(1)
@@ -35,6 +31,34 @@ const ProductsListItem = ({
 
     const onIncrement = () => {
         setCount(count + 1)
+    }
+
+    const dispatch = useDispatch()
+
+    const isLiked = useSelector((state) => state.productsLikeState[id])
+
+    const removeLike = (id) => {
+        dispatch({
+            type: 'DISLIKE',
+            id,
+        })
+    }
+
+    const addLike = (id) => {
+        dispatch({
+            type: 'LIKE',
+            id,
+        })
+    }
+
+    const productInCart = useSelector((state) => state.productInCart)
+
+    const addToCart = (id, count) => {
+        dispatch({
+            type: 'ADD_PRODUCT_TO_CART',
+            id,
+            count,
+        })
     }
 
     return (
@@ -88,29 +112,3 @@ ProductsListItem.defaultProps = {
     description: 'No description...',
     image: '/images/noimage.jpg',
 }
-
-const mapStateToProps = (state, { id }) => ({
-    isLiked: state.productsLikeState[id],
-    inCart: { [id]: state.productInCart[id] },
-})
-
-const mapDispatchToProps = (dispatch) => ({
-    addLike: (id) =>
-        dispatch({
-            type: 'LIKE',
-            id,
-        }),
-    removeLike: (id) =>
-        dispatch({
-            type: 'DISLIKE',
-            id,
-        }),
-    addToCart: (id, count) =>
-        dispatch({
-            type: 'ADD_PRODUCT_TO_CART',
-            id,
-            count,
-        }),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProductsListItem)

@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { CartTotal } from './CartTotal'
 import { CartProductList } from './CartProductList'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 
-const CartHeader = ({ productsInCart }) => {
+export const CartHeader = () => {
+    const productsInCart = useSelector((state) => state.productInCart)
     return (
         <div>
             <CartProductList productsInCart={productsInCart} />
@@ -11,9 +12,3 @@ const CartHeader = ({ productsInCart }) => {
         </div>
     )
 }
-
-const mapStateToProps = (state) => ({
-    productsInCart: state.productInCart,
-})
-
-export default connect(mapStateToProps)(CartHeader)
