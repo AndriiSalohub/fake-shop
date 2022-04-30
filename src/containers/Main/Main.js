@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom'
 import { CartPage } from 'pages/CartPage/CartPage'
 import { PaymentPage } from 'pages/PaymentPage/Payment'
 import { ShippingPage } from 'pages/ShippingPage/Shipping'
+import CheckoutPage from 'pages/CheckoutPage/CheckoutPage'
 
 export const Main = () => {
     return (
@@ -16,6 +17,7 @@ export const Main = () => {
                     <Route path="cart" element={<CartPage />} />
                     <Route path="payment" element={<PaymentPage />} />
                     <Route path="shipping" element={<ShippingPage />} />
+                    <Route path="checkout" element={<CheckoutPage />} />
                 </Routes>
             </Container>
         </>
