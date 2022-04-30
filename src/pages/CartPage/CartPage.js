@@ -5,7 +5,7 @@ import { CartProductListItemExtended } from 'components/Cart/CartProductListemIt
 import { Grid } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 
-export const CartPage = ({ changeProductQuantity, removeProductFromCart }) => {
+export const CartPage = () => {
     const dispatch = useDispatch()
     const productsInCart = useSelector((state) => state.productInCart)
 
@@ -16,8 +16,6 @@ export const CartPage = ({ changeProductQuantity, removeProductFromCart }) => {
                 <CartProductList
                     productsInCart={productsInCart}
                     CartItem={CartProductListItemExtended}
-                    removeProductFromCart={removeProductFromCart}
-                    changeProductQuantity={changeProductQuantity}
                 />
             </Grid>
 

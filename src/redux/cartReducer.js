@@ -1,5 +1,5 @@
 import { omit } from 'lodash'
-export const cartReducer = (state = { 1: 1, 2: 8 }, action) => {
+export const cartReducer = (state = {}, action) => {
     switch (action.type) {
         case 'ADD_PRODUCT_TO_CART':
             return {

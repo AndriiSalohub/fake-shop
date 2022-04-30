@@ -11,8 +11,6 @@ export const CartProductList = ({
     productsInCart,
     productsObject = getProductsObject(productsArray),
     CartItem = CartProductListItem,
-    removeProductFromCart,
-    changeProductQuantity,
 }) => {
     const productsArray = useSelector((state) => state.products)
     return (
@@ -22,8 +20,6 @@ export const CartProductList = ({
                     key={productId}
                     product={productsObject[productId]}
                     productCount={productsInCart[productId]}
-                    removeProductFromCart={removeProductFromCart}
-                    changeProductQuantity={changeProductQuantity}
                 />
             ))}
         </>

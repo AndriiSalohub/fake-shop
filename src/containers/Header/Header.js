@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     },
 })
 
-export const Header = ({ productsInCart }) => {
+export const Header = () => {
     const classes = useStyles()
     return (
         <>
@@ -47,7 +47,7 @@ export const Header = ({ productsInCart }) => {
                             </Link>
                         </Typography>
                         <Menu />
-                        <CartHeader productsInCart={productsInCart} />
+                        <CartHeader />
                     </Toolbar>
                 </Container>
             </AppBar>
