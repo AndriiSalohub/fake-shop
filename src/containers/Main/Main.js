@@ -5,7 +5,7 @@ import { Route, Routes } from 'react-router-dom'
 import { CartPage } from 'pages/CartPage/CartPage'
 import { PaymentPage } from 'pages/PaymentPage/Payment'
 import { ShippingPage } from 'pages/ShippingPage/Shipping'
-import CheckoutPage from 'pages/CheckoutPage/CheckoutPage'
+import { CheckoutPage } from 'pages/CheckoutPage/CheckoutPage'
 
 export const Main = () => {
     return (
