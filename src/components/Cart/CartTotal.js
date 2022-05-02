@@ -1,14 +1,13 @@
 import React from 'react'
 import { keys } from 'lodash'
-import {
-    getProductsObject,
-    productsArray,
-} from 'components/products/productsArray'
+import { getProductsObject } from 'components/products/productsArray'
+import { useSelector } from 'react-redux'
 
-export const CartTotal = ({
-    productsInCart,
-    productsObject = getProductsObject(productsArray),
-}) => {
+export const CartTotal = () => {
+    const productsArray = useSelector((state) => state.products)
+    const productsObject = getProductsObject(productsArray)
+    const productsInCart = useSelector((state) => state.productInCart)
+
     return (
         <div>
             Total:

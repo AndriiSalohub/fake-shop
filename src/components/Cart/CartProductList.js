@@ -9,10 +9,10 @@ import { connect, useSelector } from 'react-redux'
 
 export const CartProductList = ({
     productsInCart,
-    productsObject = getProductsObject(productsArray),
     CartItem = CartProductListItem,
 }) => {
     const productsArray = useSelector((state) => state.products)
+    const productsObject = getProductsObject(productsArray)
     return (
         <>
             {keys(productsInCart).map((productId) => (

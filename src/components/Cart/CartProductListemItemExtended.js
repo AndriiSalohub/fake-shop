@@ -23,9 +23,7 @@ const useStyles = makeStyles({
 export const CartProductListItemExtended = ({ product, productCount }) => {
     const classes = useStyles()
     const dispatch = useDispatch()
-
     const isLiked = useSelector((state) => state.productsLikeState[product.id])
-    const productsInCart = useSelector((state) => state.productInCart)
 
     const removeLike = (id) => {
         dispatch({

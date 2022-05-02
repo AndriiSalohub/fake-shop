@@ -1,7 +1,21 @@
 import axios from 'axios'
-import React, { Component, useState } from 'react'
+import React, { useState } from 'react'
+import './checkoutPage.css'
+import { useSelector } from 'react-redux'
+import { getProductsObject } from 'components/products/productsArray'
+import { Link } from 'react-router-dom'
 
-export const CheckoutPage = () => {
+export const CheckoutPage = ({}) => {
+    const productsArray = useSelector((state) => state.products)
+    const productsObject = getProductsObject(productsArray)
+    const productsInCart = useSelector((state) => state.productInCart)
+
+    const total = Object.keys(productsInCart).reduce((total, productId) => {
+        return (
+            total + productsObject[productId].price * productsInCart[productId]
+        )
+    }, 0)
+
     const [checkoutPageInfo, setCheckoutPageInfo] = useState({
         name: '',
         address: '',
@@ -67,12 +81,43 @@ export const CheckoutPage = () => {
     }
 
     const renderMessage = () => {
-        return (
-            <>
-                Dear, {checkoutPageInfo.name}, thanks for oreder!{' '}
-                <p>Address: {checkoutPageInfo.address}</p>{' '}
-            </>
-        )
+        const space = checkoutPageInfo.address.trim()
+        if (total > 0) {
+            return (
+                <>
+                    Dear, {checkoutPageInfo.name}, thanks for oreder, total cost
+                    of which: {total} $!{' '}
+                    <p>Address: {checkoutPageInfo.address}</p>{' '}
+                </>
+            )
+        } else if (
+            checkoutPageInfo.address === '' ||
+            checkoutPageInfo.address === null ||
+            checkoutPageInfo.address !== space
+        ) {
+            return (
+                <>
+                    Dear, {checkoutPageInfo.name}, thanks for oreder, but you
+                    didn't write your address.
+                    <p>Try it again.</p>
+                    <button>
+                        {' '}
+                        <Link to="/cart" className="link">
+                            Proceed to cart
+                        </Link>
+                    </button>
+                </>
+            )
+        } else {
+            return (
+                <>
+                    <p>
+                        Dear, {checkoutPageInfo.name}, you didn't buy anything!
+                    </p>
+                    <p>Please, try again</p>
+                </>
+            )
+        }
     }
 
     return (
